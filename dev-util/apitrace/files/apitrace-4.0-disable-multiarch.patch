@@ -1,0 +1,28 @@
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -207,12 +207,6 @@
+ # Installation directories
+ 
+ if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+-    # Debian multiarch support
+-    execute_process(COMMAND dpkg-architecture -qDEB_HOST_MULTIARCH
+-        OUTPUT_VARIABLE ARCH_SUBDIR
+-        ERROR_QUIET
+-        OUTPUT_STRIP_TRAILING_WHITESPACE
+-    )
+     CHECK_INCLUDE_FILES(proc/readproc.h READPROC_H_FOUND)
+     if (READPROC_H_FOUND)
+         add_definitions (-DHAVE_READPROC_H)
+@@ -229,11 +223,7 @@
+ else ()
+     set (DOC_INSTALL_DIR share/doc/${CMAKE_PROJECT_NAME})
+     set (LIB_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
+-    if (ARCH_SUBDIR)
+-        set (LIB_ARCH_INSTALL_DIR lib/${ARCH_SUBDIR}/${CMAKE_PROJECT_NAME})
+-    else ()
+-        set (LIB_ARCH_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
+-    endif ()
++    set (LIB_ARCH_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
+ endif ()
+ 
+ set (SCRIPTS_INSTALL_DIR ${LIB_INSTALL_DIR}/scripts)
