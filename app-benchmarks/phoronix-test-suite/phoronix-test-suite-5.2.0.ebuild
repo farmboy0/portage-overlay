@@ -4,7 +4,7 @@
 
 EAPI=4
 
-MILESTONE=m4
+MILESTONE=
 
 inherit eutils bash-completion-r1
 
