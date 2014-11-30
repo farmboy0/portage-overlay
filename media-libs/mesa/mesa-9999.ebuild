@@ -48,11 +48,12 @@ for card in ${VIDEO_CARDS}; do
 done
 
 IUSE="${IUSE_VIDEO_CARDS}
-	bindist +classic debug +dri3 +egl +gallium gbm gles1 gles2 +llvm +nptl
-	opencl openvg osmesa pax_kernel openmax pic r600-llvm-compiler selinux
-	vdpau wayland xvmc xa kernel_FreeBSD"
+	bindist +classic d3d9 debug +dri3 +egl +gallium +gbm gles1 gles2 +llvm
+	+nptl opencl openvg osmesa pax_kernel openmax pic r600-llvm-compiler selinux
+	vaapi vdpau wayland xvmc xa kernel_FreeBSD"
 
 REQUIRED_USE="
+	d3d9? ( gallium dri3 )
 	llvm?   ( gallium )
 	openvg? ( egl gallium )
 	opencl? (
@@ -65,6 +66,8 @@ REQUIRED_USE="
 	gles1?  ( egl )
 	gles2?  ( egl )
 	r600-llvm-compiler? ( gallium llvm || ( video_cards_r600 video_cards_radeonsi video_cards_radeon ) )
+	vaapi? ( gallium )
+	vdpau? ( gallium )
 	wayland? ( egl gbm )
 	xa?  ( gallium )
 	video_cards_freedreno?  ( gallium )
@@ -83,7 +86,7 @@ REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 "
 
-LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.56"
+LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.58"
 # keep correct libdrm and dri2proto dep
 # keep blocks in rdepend for binpkg
 RDEPEND="
@@ -101,7 +104,19 @@ RDEPEND="
 	>=x11-libs/libXdamage-1.1.4-r1[${MULTILIB_USEDEP}]
 	>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 	>=x11-libs/libXxf86vm-1.1.3[${MULTILIB_USEDEP}]
-	>=x11-libs/libxcb-1.9.3[${MULTILIB_USEDEP}]
+	>=x11-libs/libxcb-1.11[${MULTILIB_USEDEP}]
+	>=x11-proto/xcb-proto-1.11[${MULTILIB_USEDEP}]
+	d3d9? (
+		video_cards_r600? (
+			x11-drivers/xf86-video-ati[dri3]
+		)
+		video_cards_radeon? (
+			x11-drivers/xf86-video-ati[dri3]
+		)
+		video_cards_radeonsi? (
+			x11-drivers/xf86-video-ati[dri3]
+		)
+	)
 	llvm? (
 		video_cards_radeonsi? ( || (
 			>=dev-libs/elfutils-0.155-r1[${MULTILIB_USEDEP}]
@@ -117,13 +132,14 @@ RDEPEND="
 				>=dev-libs/libelf-0.8.13-r2[${MULTILIB_USEDEP}]
 				) )
 		)
-		>=sys-devel/llvm-3.3-r3[${MULTILIB_USEDEP}]
+		>=sys-devel/llvm-3.4.2[${MULTILIB_USEDEP}]
 	)
 	opencl? (
 		app-admin/eselect-opencl
 		dev-libs/libclc
 	)
 	openmax? ( >=media-libs/libomxil-bellagio-0.9.3[${MULTILIB_USEDEP}] )
+	vaapi? ( >=x11-libs/libva-0.35.0[${MULTILIB_USEDEP}] )
 	vdpau? ( >=x11-libs/libvdpau-0.7[${MULTILIB_USEDEP}] )
 	wayland? ( >=dev-libs/wayland-1.2.0[${MULTILIB_USEDEP}] )
 	xvmc? ( >=x11-libs/libXvMC-1.0.8[${MULTILIB_USEDEP}] )
@@ -181,12 +197,6 @@ pkg_setup() {
 	# workaround toc-issue wrt #386545
 	use ppc64 && append-flags -mminimal-toc
 
-	# warning message for bug 459306
-	if use llvm && has_version sys-devel/llvm[!debug=]; then
-		ewarn "Mismatch between debug USE flags in media-libs/mesa and sys-devel/llvm"
-		ewarn "detected! This can cause problems. For details, see bug 459306."
-	fi
-
 	python-any-r1_pkg_setup
 }
 
@@ -242,11 +252,11 @@ multilib_src_configure() {
 
 	if use gallium; then
 		myconf+="
+			$(use_enable d3d9 nine)
 			$(use_enable llvm gallium-llvm)
-			$(use_enable openvg)
-			$(use_enable openvg gallium-egl)
 			$(use_enable openmax omx)
 			$(use_enable r600-llvm-compiler)
+			$(use_enable vaapi va)
 			$(use_enable vdpau)
 			$(use_enable xa)
 			$(use_enable xvmc)
@@ -270,11 +280,11 @@ multilib_src_configure() {
 		fi
 
 		gallium_enable video_cards_freedreno freedreno
+
 		# opencl stuff
 		if use opencl; then
 			myconf+="
 				$(use_enable opencl)
-				--with-opencl-libdir="${EPREFIX}/usr/$(get_libdir)/OpenCL/vendors/mesa"
 				--with-clang-libdir="${EPREFIX}/usr/lib"
 				"
 		fi
@@ -300,6 +310,7 @@ multilib_src_configure() {
 		--enable-glx \
 		--enable-shared-glapi \
 		$(use_enable !bindist texture-float) \
+		$(use_enable d3d9 nine) \
 		$(use_enable debug) \
 		$(use_enable dri3) \
 		$(use_enable egl) \
