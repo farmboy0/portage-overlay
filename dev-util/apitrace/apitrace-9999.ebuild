@@ -36,7 +36,6 @@ RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
 DEPEND="${RDEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.0-cmake-snappy.patch
 	"${FILESDIR}"/${PN}-4.0-system-libs.patch
 	"${FILESDIR}"/${PN}-4.0-disable-cli.patch
 	"${FILESDIR}"/${PN}-4.0-disable-multiarch.patch
@@ -46,6 +45,7 @@ src_configure() {
 	my_configure() {
 		mycmakeargs=(
 			$(cmake-utils_use_enable egl EGL)
+			-DDOC_INSTALL_DIR="${D}usr/share/doc/${PF}"
 		)
 		if multilib_build_binaries ; then
 			mycmakeargs+=(
@@ -71,14 +71,13 @@ src_compile() {
 src_install() {
 	cmake-multilib_src_install
 
+	dodoc docs/FORMAT.markdown docs/VMWX_map_buffer_debug.txt LICENSE
+}
+
+multilib_src_install() {
+	cmake-utils_src_install "${_cmake_args[@]}"
+
 	dosym glxtrace.so /usr/$(get_libdir)/${PN}/wrappers/libGL.so
 	dosym glxtrace.so /usr/$(get_libdir)/${PN}/wrappers/libGL.so.1
 	dosym glxtrace.so /usr/$(get_libdir)/${PN}/wrappers/libGL.so.1.2
-
-	dodoc {BUGS,DEVELOPMENT,NEWS,README,TODO}.markdown
-
-	if multilib_build_binaries ; then
-		exeinto /usr/$(get_libdir)/${PN}/scripts
-		doexe $(find scripts -type f -executable)
-	fi
 }

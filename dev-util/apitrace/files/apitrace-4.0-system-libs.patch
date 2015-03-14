@@ -1,29 +1,43 @@
---- a/CMakeLists.txt	2013-11-21 18:04:33.000000000 +0100
-+++ b/CMakeLists.txt	2013-11-21 18:15:30.000000000 +0100
-@@ -224,23 +224,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index aa7e16a..5a5972c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -355,35 +355,14 @@
  # - on unices to prevent symbol collisions when tracing applications that link
  # against other versions of these libraries
  
--set (ZLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/zlib)
--set (ZLIB_LIBRARIES z_bundled)
--add_subdirectory (thirdparty/zlib)
--
--include_directories (${ZLIB_INCLUDE_DIRS})
--
--set (SNAPPY_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/snappy)
--set (SNAPPY_LIBRARIES snappy_bundled)
--add_subdirectory (thirdparty/snappy)
-+find_package (ZLIB REQUIRED)
-+include_directories (${ZLIB_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/zlib)
- 
+-if (NOT ENABLE_STATIC_SNAPPY)
+-    find_package (SNAPPY)
+-endif ()
+-if (ENABLE_STATIC_SNAPPY OR NOT SNAPPY_FOUND)
+-    set (SNAPPY_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/snappy)
+-    set (SNAPPY_LIBRARIES snappy_bundled)
+-    add_subdirectory (thirdparty/snappy)
+-endif ()
 +find_package(SNAPPY REQUIRED)
  include_directories (${SNAPPY_INCLUDE_DIRS})
  
--set (PNG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libpng)
--set (PNG_DEFINITIONS "")
--set (PNG_LIBRARIES png_bundled)
--
--add_subdirectory (thirdparty/libpng)
+-if (NOT ENABLE_STATIC_ZLIB)
+-    find_package (ZLIB)
+-endif ()
+-if (ENABLE_STATIC_ZLIB OR NOT ZLIB_FOUND)
+-    set (ZLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/zlib)
+-    set (ZLIB_LIBRARIES z_bundled)
+-    add_subdirectory (thirdparty/zlib)
+-endif ()
+-include_directories (${ZLIB_INCLUDE_DIRS})
++find_package (ZLIB REQUIRED)
++include_directories (${ZLIB_INCLUDE_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/zlib)
+ 
+-if (NOT ENABLE_STATIC_PNG)
+-    find_package (PNG)
+-endif ()
+-if (ENABLE_STATIC_PNG OR NOT PNG_FOUND)
+-    set (PNG_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libpng)
+-    set (PNG_DEFINITIONS "")
+-    set (PNG_LIBRARIES png_bundled)
+-    add_subdirectory (thirdparty/libpng)
+-endif ()
 +find_package (PNG REQUIRED)
 +include_directories (${PNG_INCLUDE_DIRS})
  

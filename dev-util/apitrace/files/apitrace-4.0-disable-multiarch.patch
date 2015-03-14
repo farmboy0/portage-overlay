@@ -1,19 +1,24 @@
---- CMakeLists.txt
-+++ CMakeLists.txt
-@@ -207,12 +207,6 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9882a0b..aa7e16a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -331,15 +331,6 @@
+ ##############################################################################
  # Installation directories
  
- if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+-if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 -    # Debian multiarch support
 -    execute_process(COMMAND dpkg-architecture -qDEB_HOST_MULTIARCH
 -        OUTPUT_VARIABLE ARCH_SUBDIR
 -        ERROR_QUIET
 -        OUTPUT_STRIP_TRAILING_WHITESPACE
 -    )
-     CHECK_INCLUDE_FILES(proc/readproc.h READPROC_H_FOUND)
-     if (READPROC_H_FOUND)
-         add_definitions (-DHAVE_READPROC_H)
-@@ -229,11 +223,7 @@
+-endif()
+-
+ if (WIN32 OR APPLE)
+     # On Windows/MacOSX, applications are usually installed on a directory of
+     # their own
+@@ -349,11 +340,7 @@
  else ()
      set (DOC_INSTALL_DIR share/doc/${CMAKE_PROJECT_NAME})
      set (LIB_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
