@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -71,7 +71,7 @@ src_compile() {
 src_install() {
 	cmake-multilib_src_install
 
-	dodoc docs/FORMAT.markdown docs/VMWX_map_buffer_debug.txt LICENSE
+	dodoc docs/FORMAT.markdown docs/VMWX_map_buffer_debug.txt
 }
 
 multilib_src_install() {
