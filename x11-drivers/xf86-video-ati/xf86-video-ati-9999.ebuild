@@ -4,7 +4,8 @@
 
 EAPI=5
 
-EGIT_REPO_URI="https://github.com/iXit/xf86-video-ati"
+#EGIT_REPO_URI="https://github.com/iXit/xf86-video-ati"
+EGIT_REPO_URI="http://cgit.freedesktop.org/xorg/driver/xf86-video-ati"
 
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-r3"
