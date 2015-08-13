@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -15,12 +15,12 @@ LICENSE="MIT"
 EGIT_REPO_URI="https://github.com/apitrace/apitrace"
 PYTHON_COMPAT=( python2_7 )
 
-inherit cmake-multilib eutils python-single-r1 git-2
+inherit cmake-multilib eutils python-single-r1 git-r3
 
 RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
 	media-libs/libpng:0=
 	sys-libs/zlib
-	>=sys-devel/gcc-4.9.0
+	>=sys-devel/gcc-4.9.0:*
 	sys-process/procps[${MULTILIB_USEDEP}]
 	media-libs/mesa[egl?]
 	egl? ( || (
