@@ -7,7 +7,7 @@ EAPI=5
 DESCRIPTION="A tool for tracing, analyzing, and debugging graphics APIs"
 HOMEPAGE="https://github.com/apitrace/apitrace"
 
-IUSE="cli egl qt4"
+IUSE="cli egl qt5"
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
 LICENSE="MIT"
@@ -20,6 +20,7 @@ inherit cmake-multilib eutils python-single-r1 git-2
 RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
 	media-libs/libpng:0=
 	sys-libs/zlib
+	>=sys-devel/gcc-4.9.0
 	sys-process/procps[${MULTILIB_USEDEP}]
 	media-libs/mesa[egl?]
 	egl? ( || (
@@ -27,10 +28,10 @@ RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
 		<media-libs/mesa-8.0[gles]
 	) )
 	x11-libs/libX11[${MULTILIB_USEDEP}]
-	qt4? (
-		>=dev-qt/qtcore-4.7:4
-		>=dev-qt/qtgui-4.7:4
-		>=dev-qt/qtwebkit-4.7:4
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtwebkit:5
 		>=dev-libs/qjson-0.5
 	)"
 DEPEND="${RDEPEND}"
@@ -50,7 +51,7 @@ src_configure() {
 		if multilib_build_binaries ; then
 			mycmakeargs+=(
 				$(cmake-utils_use_enable cli CLI)
-				$(cmake-utils_use_enable qt4 GUI)
+				$(cmake-utils_use_enable qt5 GUI)
 			)
 		else
 			mycmakeargs+=(
