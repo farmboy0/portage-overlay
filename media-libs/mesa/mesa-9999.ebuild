@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI=5
 
@@ -134,6 +134,9 @@ for card in ${RADEON_CARDS}; do
 		video_cards_${card}? ( ${LIBDRM_DEPSTRING}[video_cards_radeon] )
 	"
 done
+RDEPEND="${RDEPEND}
+	video_cards_radeonsi? ( ${LIBDRM_DEPSTRING}[video_cards_amdgpu] )
+"
 
 DEPEND="${RDEPEND}
 	llvm? (
@@ -166,10 +169,16 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${MY_P}"
 EGIT_CHECKOUT_DIR=${S}
 
-# It is slow without texrels, if someone wants slow
-# mesa without texrels +pic use is worth the shot
-QA_EXECSTACK="usr/lib*/libGL.so*"
-QA_WX_LOAD="usr/lib*/libGL.so*"
+QA_WX_LOAD="
+x86? (
+	!pic? (
+		usr/lib*/libglapi.so.0.0.0
+		usr/lib*/libGLESv1_CM.so.1.1.0
+		usr/lib*/libGLESv2.so.2.0.0
+		usr/lib*/libGL.so.1.2.0
+		usr/lib*/libOSMesa.so.8.0.0
+	)
+)"
 
 pkg_setup() {
 	# warning message for bug 459306
@@ -230,6 +239,8 @@ multilib_src_configure() {
 			$(use_enable xa)
 			$(use_enable xvmc)
 		"
+		use vaapi && myconf+="--with-va-libdir=/usr/$(get_libdir)/va/drivers"
+
 		gallium_enable swrast
 		gallium_enable video_cards_vmware svga
 		gallium_enable video_cards_nouveau nouveau
