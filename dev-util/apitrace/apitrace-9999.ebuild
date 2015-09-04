@@ -20,7 +20,6 @@ inherit cmake-multilib eutils python-single-r1 git-r3
 RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
 	media-libs/libpng:0=
 	sys-libs/zlib
-	>=sys-devel/gcc-4.9.0:*
 	sys-process/procps[${MULTILIB_USEDEP}]
 	media-libs/mesa[egl?]
 	egl? ( || (
