@@ -4,8 +4,8 @@
 
 EAPI=5
 
-#EGIT_REPO_URI="git://anongit.freedesktop.org/mesa/mesa"
-EGIT_REPO_URI="https://github.com/iXit/Mesa-3D"
+EGIT_REPO_URI="git://anongit.freedesktop.org/mesa/mesa"
+#EGIT_REPO_URI="https://github.com/iXit/Mesa-3D"
 
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-r3"
@@ -117,7 +117,7 @@ RDEPEND="
 				)
 			)
 	openmax? ( >=media-libs/libomxil-bellagio-0.9.3:=[${MULTILIB_USEDEP}] )
-	vaapi? ( >=x11-libs/libva-0.35.0:=[${MULTILIB_USEDEP}] )
+	vaapi? ( >=x11-libs/libva-1.6.0:=[${MULTILIB_USEDEP}] )
 	vdpau? ( >=x11-libs/libvdpau-1.1:=[${MULTILIB_USEDEP}] )
 	wayland? ( >=dev-libs/wayland-1.2.0:=[${MULTILIB_USEDEP}] )
 	xvmc? ( >=x11-libs/libXvMC-1.0.8:=[${MULTILIB_USEDEP}] )
