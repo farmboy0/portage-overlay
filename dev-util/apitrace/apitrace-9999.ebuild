@@ -2,31 +2,31 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI="5"
+PYTHON_COMPAT=( python2_7 )
+EGIT_REPO_URI="https://github.com/apitrace/apitrace"
+
+inherit cmake-multilib eutils python-single-r1 git-r3
 
 DESCRIPTION="A tool for tracing, analyzing, and debugging graphics APIs"
 HOMEPAGE="https://github.com/apitrace/apitrace"
 
-IUSE="cli egl qt5"
-KEYWORDS="~amd64 ~x86"
-SLOT="0"
 LICENSE="MIT"
+SLOT="0"
+KEYWORDS="~amd64 ~x86"
+IUSE="cli egl qt5"
 
-EGIT_REPO_URI="https://github.com/apitrace/apitrace"
-PYTHON_COMPAT=( python2_7 )
-
-inherit cmake-multilib eutils python-single-r1 git-r3
-
-RDEPEND="app-arch/snappy[${MULTILIB_USEDEP}]
-	media-libs/libpng:0=
-	sys-libs/zlib
-	sys-process/procps[${MULTILIB_USEDEP}]
-	media-libs/mesa[egl?]
+RDEPEND="${PYTHON_DEPS}
+	>=app-arch/snappy-1.1.1[${MULTILIB_USEDEP}]
+	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
+	>=media-libs/mesa-9.1.6[egl?,${MULTILIB_USEDEP}]
 	egl? ( || (
 		>=media-libs/mesa-8.0[gles1,gles2]
 		<media-libs/mesa-8.0[gles]
 	) )
-	x11-libs/libX11[${MULTILIB_USEDEP}]
+	media-libs/libpng:0=
+	sys-process/procps[${MULTILIB_USEDEP}]
+	x11-libs/libX11
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
@@ -47,7 +47,7 @@ src_configure() {
 			$(cmake-utils_use_enable egl EGL)
 			-DDOC_INSTALL_DIR="${D}usr/share/doc/${PF}"
 		)
-		if multilib_build_binaries ; then
+		if multilib_is_native_abi ; then
 			mycmakeargs+=(
 				$(cmake-utils_use_enable cli CLI)
 				$(cmake-utils_use_enable qt5 GUI)
@@ -58,7 +58,7 @@ src_configure() {
 				-DENABLE_GUI=OFF
 			)
 		fi
-	cmake-utils_src_configure
+		cmake-utils_src_configure
 	}
 
 	multilib_parallel_foreach_abi my_configure
@@ -72,6 +72,8 @@ src_install() {
 	cmake-multilib_src_install
 
 	dodoc docs/FORMAT.markdown docs/VMWX_map_buffer_debug.txt
+
+	make_desktop_entry qapitrace QApitrace media-playback-start Development;
 }
 
 multilib_src_install() {
