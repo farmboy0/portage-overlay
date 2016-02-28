@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index bfb69ad..9882a0b 100644
+index 200cc24..0148ae0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -486,7 +486,6 @@
+@@ -501,7 +501,6 @@
  add_subdirectory (helpers)
  add_subdirectory (wrappers)
  add_subdirectory (image)
@@ -10,57 +10,11 @@ index bfb69ad..9882a0b 100644
  
  
  ##############################################################################
-@@ -497,32 +496,35 @@
-         add_subdirectory (inject)
+@@ -513,6 +512,7 @@
      endif ()
      add_subdirectory (cli)
+     add_subdirectory (scripts)
 +    add_subdirectory (retrace)
  endif ()
  
- ##############################################################################
- # Scripts (to support the CLI)
  
--install (
--    PROGRAMS
--        scripts/highlight.py
--        scripts/jsondiff.py
--        scripts/profileshader.py
--        scripts/retracediff.py
--        scripts/snapdiff.py
--        scripts/tracecheck.py
--        scripts/tracediff.py
--        scripts/unpickle.py
--    DESTINATION ${SCRIPTS_INSTALL_DIR}
--)
--if (WIN32)
-+if (ENABLE_CLI)
-     install (
--        PROGRAMS scripts/convert.py
-+        PROGRAMS
-+            scripts/highlight.py
-+            scripts/jsondiff.py
-+            scripts/profileshader.py
-+            scripts/retracediff.py
-+            scripts/snapdiff.py
-+            scripts/tracecheck.py
-+            scripts/tracediff.py
-+            scripts/unpickle.py
-         DESTINATION ${SCRIPTS_INSTALL_DIR}
-     )
--    install (
--        FILES scripts/apitrace.PIXExp
--        DESTINATION ${SCRIPTS_INSTALL_DIR}
--    )
-+    if (WIN32)
-+        install (
-+            PROGRAMS scripts/convert.py
-+            DESTINATION ${SCRIPTS_INSTALL_DIR}
-+        )
-+        install (
-+            FILES scripts/apitrace.PIXExp
-+            DESTINATION ${SCRIPTS_INSTALL_DIR}
-+        )
-+    endif ()
- endif ()
- 
- ##############################################################################
