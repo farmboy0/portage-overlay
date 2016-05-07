@@ -45,7 +45,7 @@ src_configure() {
 	my_configure() {
 		mycmakeargs=(
 			$(cmake-utils_use_enable egl EGL)
-			-DDOC_INSTALL_DIR="${D}usr/share/doc/${PF}"
+			-DDOC_INSTALL_DIR="/usr/share/doc/${PF}"
 		)
 		if multilib_is_native_abi ; then
 			mycmakeargs+=(
