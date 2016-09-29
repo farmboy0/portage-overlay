@@ -30,7 +30,10 @@ RDEPEND="
 	x11-libs/libXinerama[${MULTILIB_USEDEP}]
 	x11-libs/libXrandr[${MULTILIB_USEDEP}]
 	x11-libs/libXrender[${MULTILIB_USEDEP}]
-	!x11drivers/ati-drivers
+	vulkan? (
+		media-libs/vulkan-base
+	)
+	!x11-drivers/ati-drivers
 "
 
 DEPEND="${RDEPEND}
@@ -96,15 +99,15 @@ src_prepare() {
 		if use amd64 ; then
 			unpack_deb "./amdgpu-pro-driver/amdgpu-pro-vulkan-driver_${BUILD_VER}_amd64.deb"
 
-			mkdir -p ./usr/lib64/vulkan
-			cp -d ./usr/lib/x86_64-linux-gnu/* ./usr/lib64/vulkan
-			sed -i 's|/usr/lib/x86_64-linux-gnu|/usr/lib64/vulkan|g' ./etc/vulkan/icd.d/amd_icd64.json
+			mkdir -p ./usr/lib64/vulkan/amdgpu-pro
+			cp -d ./usr/lib/x86_64-linux-gnu/* ./usr/lib64/vulkan/amdgpu-pro
+			sed -i 's|/usr/lib/x86_64-linux-gnu|/usr/lib64/vulkan/amdgpu-pro|g' ./etc/vulkan/icd.d/amd_icd64.json
 		fi
 		unpack_deb "./amdgpu-pro-driver/amdgpu-pro-vulkan-driver_${BUILD_VER}_i386.deb"
 
-		mkdir -p ./usr/lib32/vulkan
-		cp -d ./usr/lib/i386-linux-gnu/* ./usr/lib32/vulkan
-		sed -i 's|/usr/lib/i386-linux-gnu|/usr/lib32/vulkan|g' ./etc/vulkan/icd.d/amd_icd32.json
+		mkdir -p ./usr/lib32/vulkan/amdgpu-pro
+		cp -d ./usr/lib/i386-linux-gnu/* ./usr/lib32/vulkan/amdgpu-pro
+		sed -i 's|/usr/lib/i386-linux-gnu|/usr/lib32/vulkan/amdgpu-pro|g' ./etc/vulkan/icd.d/amd_icd32.json
 
 		chmod -x ./etc/vulkan/icd.d/*
 		rm -rf ./usr/lib
@@ -208,14 +211,24 @@ src_prepare() {
 	chmod -x ./etc/amd/*
 	chmod -x ./etc/gbm/*
 	chmod -x ./usr/share/X11/xorg.conf.d/*
+
+	# Hack for libGL.so hardcoded directory path for amdgpu_dri.so
+	if use amd64 ; then
+		mkdir -p ./usr/lib/x86_64-linux-gnu/dri
+		ln -s ../../../lib64/dri/amdgpu_dri.so ./usr/lib/x86_64-linux-gnu/dri/amdgpu_dri.so
+	fi
+	mkdir -p ./usr/lib/i386-linux-gnu/dri
+	ln -s ../../../lib32/dri/amdgpu_dri.so ./usr/lib/i386-linux-gnu/dri/amdgpu_dri.so
 }
 
 src_install() {
 	cp -dR -t "${D}" * || die "Install failed!"
+}
 
-	# Hack for libGL.so hardcoded directory path for amdgpu_dri.so
-	if use amd64 ; then
-		dosym ../../../lib64/dri/amdgpu_dri.so /usr/lib/x86_64-linux-gnu/dri/amdgpu_dri.so
-	fi
-	dosym ../../../lib32/dri/amdgpu_dri.so /usr/lib/i386-linux-gnu/dri/amdgpu_dri.so
+pkg_postinst() {
+	elog "If you dont use xorg-server 1.18 you need to edit the following symlinks"
+	elog "/usr/lib64/opengl/amdgpu-pro/drivers"
+	elog "/usr/lib64/opengl/amdgpu-pro/extensions"
+	elog "to point to the driver directory for your xorg-server version."
+	elog "Supported versions are 1.15 to 1.18."
 }
