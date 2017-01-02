@@ -5,8 +5,8 @@ EAPI="4"
 inherit eutils bash-completion-r1
 
 DESCRIPTION="Dynamic Kernel Module Support"
-SRC_URI="http://linux.dell.com/dkms/permalink/${P}.tar.gz"
-HOMEPAGE="http://linux.dell.com/dkms"
+SRC_URI="https://github.com/dell/dkms/archive/v${PV}.tar.gz"
+HOMEPAGE="https://github.com/dell/dkms"
 LICENSE="GPL-2"
 DEPEND=""
 RDEPEND="app-arch/rpm"
