@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 18cda3b..a65a0e2 100644
+index cf43fb1..c1ae53b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -408,46 +408,16 @@
+@@ -428,46 +428,16 @@
  
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/compat)
  
@@ -38,7 +38,7 @@ index 18cda3b..a65a0e2 100644
 -# version), adding its include dirs and libraries, and overwriting ZLIB_FOUND.
 -# So if the system's ZLIB was did not meet the our requirements, then there's
 -# no safe way to use the system's PNG library.
--if (NOT WIN32 AND NOT ENABLE_STATIC_EXE AND ZLIB_FOUND)
+-if (NOT WIN32 AND NOT APPLE AND NOT ENABLE_STATIC_EXE AND ZLIB_FOUND)
 -    find_package (PNG)
 -endif ()
 -if (NOT PNG_FOUND)
