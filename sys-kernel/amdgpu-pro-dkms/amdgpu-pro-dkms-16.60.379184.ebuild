@@ -9,7 +9,7 @@ inherit eutils linux-info multilib-build unpacker
 
 DESCRIPTION="AMD GPU-Pro kernel module for Radeon Evergreen (HD5000 Series) and newer chipsets"
 HOMEPAGE="http://support.amd.com/en-us/kb-articles/Pages/AMD-Radeon-GPU-PRO-Linux-Beta-Driver%E2%80%93Release-Notes.aspx"
-BUILD_VER=16.40-348864
+BUILD_VER=16.60-379184
 SRC_URI="https://www2.ati.com/drivers/beta/amdgpu-pro-${BUILD_VER}.tar.xz"
 
 RESTRICT="fetch strip"
@@ -49,11 +49,7 @@ src_prepare() {
 	rm -rf ./usr/share amdgpu-pro-${BUILD_VER} ./usr/src/amdgpu-pro-${BUILD_VER}/firmware
 
 	pushd ./usr/src/amdgpu-pro-${BUILD_VER} > /dev/null
-		epatch "${FILESDIR}"/0002-Add-in-Gentoo-as-an-option-for-the-OS-otherwise-it-w.patch
-		epatch "${FILESDIR}"/0005-update-kcl_ttm_bo_reserve-for-linux-4.7.patch
-		epatch "${FILESDIR}"/0009-Change-name-of-vblank_disable_allowed-to-vblank_disa.patch
-		epatch "${FILESDIR}"/0010-Remove-connector-parameter-from-__drm_atomic_helper_.patch
-		epatch "${FILESDIR}"/0012-disable-dal-by-default.patch
+		epatch "${FILESDIR}"/0014-Add-Gentoo-as-OS-option.patch
 		# Dont copy the firmware
 		head -n -4 ./pre-build.sh > ./pre-build.sh.new
 		mv ./pre-build.sh.new ./pre-build.sh
