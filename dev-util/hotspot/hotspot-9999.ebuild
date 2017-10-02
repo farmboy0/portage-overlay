@@ -27,9 +27,11 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-qt/qtwidgets-5.7.1
 	>=dev-qt/qtnetwork-5.7.1
 	>=dev-qt/qttest-5.7.1
+	kde-frameworks/extra-cmake-modules
 	kde-frameworks/kconfigwidgets
 	kde-frameworks/kcoreaddons
 	kde-frameworks/ki18n
+	kde-frameworks/kio
 	kde-frameworks/kitemmodels
 	kde-frameworks/kitemviews
 	kde-frameworks/threadweaver
