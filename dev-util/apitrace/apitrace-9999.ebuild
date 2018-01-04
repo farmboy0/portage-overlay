@@ -39,6 +39,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.0-system-libs.patch
 	"${FILESDIR}"/${PN}-4.0-disable-cli.patch
 	"${FILESDIR}"/${PN}-4.0-disable-multiarch.patch
+	"${FILESDIR}"/${PN}-9999-fix-libbacktrace-build.patch
 )
 
 src_configure() {
