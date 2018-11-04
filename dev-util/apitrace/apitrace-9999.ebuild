@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 PYTHON_COMPAT=( python2_7 )
 EGIT_REPO_URI="https://github.com/apitrace/apitrace"
 
@@ -45,13 +45,13 @@ PATCHES=(
 src_configure() {
 	my_configure() {
 		mycmakeargs=(
-			$(cmake-utils_use_enable egl EGL)
+			-DENABLE_EGL="$(usex egl)"
 			-DDOC_INSTALL_DIR="/usr/share/doc/${PF}"
 		)
 		if multilib_is_native_abi ; then
 			mycmakeargs+=(
-				$(cmake-utils_use_enable cli CLI)
-				$(cmake-utils_use_enable qt5 GUI)
+				-DENABLE_CLI="$(usex cli)"
+				-DENABLE_GUI="$(usex qt5)"
 			)
 		else
 			mycmakeargs+=(
