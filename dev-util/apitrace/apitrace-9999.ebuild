@@ -3,10 +3,10 @@
 # $Id$
 
 EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{1,2,3,4,5,6,7} )
 EGIT_REPO_URI="https://github.com/apitrace/apitrace"
 
-inherit cmake-multilib eutils python-single-r1 git-r3
+inherit cmake-multilib eutils python-any-r1 git-r3
 
 DESCRIPTION="A tool for tracing, analyzing, and debugging graphics APIs"
 HOMEPAGE="https://github.com/apitrace/apitrace"
