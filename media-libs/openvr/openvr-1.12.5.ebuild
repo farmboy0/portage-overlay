@@ -3,6 +3,7 @@
 
 EAPI="7"
 EGIT_REPO_URI="https://github.com/ValveSoftware/openvr"
+CMAKE_ECLASS=cmake
 
 if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-r3"
@@ -21,7 +22,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-LICENSE="BSD"
+LICENSE="OpenVR"
 SLOT="0"
 IUSE="static"
 
@@ -33,12 +34,17 @@ PATCHES=(
     "${FILESDIR}/${PN}-libdir.patch"
 )
 
+DOCS=(
+    "${S}/LICENSE"
+    "${S}/README.md"
+)
+
 src_configure() {
 	my_configure() {
 		mycmakeargs=(
 			-DBUILD_SHARED="$(usex static OFF ON)"
 		)
-		cmake-utils_src_configure
+		cmake_src_configure
 	}
 	multilib_parallel_foreach_abi my_configure
 }
