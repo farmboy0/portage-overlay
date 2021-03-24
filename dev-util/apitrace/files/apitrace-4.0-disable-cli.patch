@@ -1,20 +1,22 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index de0e5d1..13b1270 100644
+index 1e23728..09a9fd3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -537,7 +537,6 @@
+@@ -602,8 +602,6 @@
  add_subdirectory (dispatch)
  add_subdirectory (helpers)
  add_subdirectory (wrappers)
 -add_subdirectory (retrace)
+-add_subdirectory (frametrim)
  
  
  ##############################################################################
-@@ -549,6 +548,7 @@
+@@ -615,6 +613,8 @@
      endif ()
      add_subdirectory (cli)
      add_subdirectory (scripts)
 +    add_subdirectory (retrace)
++    add_subdirectory (frametrim)
  endif ()
  
  

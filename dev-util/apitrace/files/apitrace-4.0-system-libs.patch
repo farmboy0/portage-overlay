@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 211a474..525e734 100644
+index 680798d..dd6ebcb 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -449,47 +449,17 @@
+@@ -485,47 +485,17 @@
  
  include_directories (${CMAKE_CURRENT_SOURCE_DIR}/compat)
  
