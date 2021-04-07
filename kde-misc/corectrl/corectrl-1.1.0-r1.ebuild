@@ -23,12 +23,12 @@ REQUIRED_USE=""
 
 DEPEND="
 	dev-qt/qtcore:5
-	dev-qt/qtcharts:5
+	dev-qt/qtcharts:5[qml]
 	dev-qt/qtdbus:5
 	dev-qt/qtnetwork:5
 	dev-qt/qtquickcontrols2:5
 	dev-qt/qtwidgets:5
-	dev-qt/linguist-tools:5
+	dev-qt/linguist-tools:5[qml]
 	kde-frameworks/kauth
 	kde-frameworks/karchive
 	dev-libs/botan:2
