@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=7
 
 ESVN_REPO_URI="svn://svn.icculus.org/smjpeg/trunk/"
 
-inherit subversion autotools-multilib
+inherit autotools multilib-minimal subversion
 
 DESCRIPTION="SDL Motion JPEG Library"
 HOMEPAGE="http://www.lokigames.com/development/smjpeg.php3"
@@ -19,12 +19,19 @@ IUSE=""
 RDEPEND=">=media-libs/libsdl-1.1.7"
 DEPEND="${RDEPEND}"
 
-AUTOTOOLS_AUTORECONF=1
-AUTOTOOLS_PRUNE_LIBTOOL_FILES=all
-
 DOCS=( CHANGES README TODO SMJPEG.txt )
 
 src_prepare() {
     rm acinclude.m4
-    autotools-multilib_src_prepare
+    eapply_user
+    eautoreconf
+}
+
+multilib_src_configure() {
+    ECONF_SOURCE=${S} econf --disable-static
+}
+
+multilib_src_install_all() {
+    einstalldocs
+    find "${ED}" -type f -name "*.la" -delete
 }
