@@ -1,8 +1,7 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=7
 
 EGIT_REPO_URI="git://people.freedesktop.org/~airlied/radeontool"
 
@@ -10,11 +9,10 @@ if [[ ${PV} = 9999* ]]; then
 	GIT_ECLASS="git-r3"
 fi
 
-inherit autotools-utils ${GIT_ECLASS}
+inherit autotools ${GIT_ECLASS}
 
-DESCRIPTION="Manage the backlight, external video output and registers of ATI Radeon graphics cards"
-
-HOMEPAGE="http://people.freedesktop.org/~airlied/radeontool/"
+DESCRIPTION="Utility to get/set registers and controlling backlight on radeon based GPUs"
+HOMEPAGE="https://cgit.freedesktop.org/~airlied/radeontool/"
 
 if [[ $PV == 9999* ]]; then
 	SRC_URI=""
@@ -28,8 +26,11 @@ KEYWORDS=""
 
 IUSE=""
 
-RDEPEND=">=x11-libs/libpciaccess-0.12.0"
+RDEPEND="x11-libs/libpciaccess"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
-AUTOTOOLS_AUTORECONF=1
+src_prepare() {
+	default
+        eautoreconf
+}
