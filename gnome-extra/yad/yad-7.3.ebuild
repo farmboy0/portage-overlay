@@ -1,11 +1,8 @@
-# Copyright 2014 deterenkelt
-# Distributed under the terms of the GNU General Public License v3
-# $Header: $
+# Copyright 1999-2021 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-
-AUTOTOOLS_AUTORECONF=1
-inherit autotools autotools-utils gnome2
+EAPI=7
+inherit autotools gnome2
 
 DESCRIPTION="A tool for creating graphical dialogs from shell scripts. Fork of zenity."
 HOMEPAGE="https://github.com/v1cont/yad"
@@ -33,7 +30,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	autotools-utils_src_prepare
+	eautoreconf
 	gnome2_src_prepare
 }
 
