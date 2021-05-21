@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI="5"
-inherit git-r3 autotools-utils flag-o-matic
+inherit git-r3 autotools flag-o-matic
 
 DESCRIPTION="An open-source multi-platform crash reporting system"
 HOMEPAGE="http://code.google.com/p/google-breakpad/"
@@ -16,21 +16,28 @@ IUSE=""
 
 DEPEND=""
 
-AUTOTOOLS_AUTORECONF=1
-
 src_unpack() {
 	git-r3_src_unpack
 	git-r3_fetch https://chromium.googlesource.com/linux-syscall-support
 	git-r3_checkout https://chromium.googlesource.com/linux-syscall-support ${S}/src/third_party/lss
 }
 
+src_prepare() {
+	default
+
+	# Fix docdir
+	sed '/^docdir/s@$(PACKAGE)-$(VERSION)@$(PF)@' -i Makefile.am || die
+
+	eautoreconf
+}
+
 src_compile() {
 	append-flags -fPIC
-	autotools-utils_src_compile
+	default
 }
 
 src_install() {
-	autotools-utils_src_install docdir="${EPREFIX}"/usr/share/doc/${PF}
+	default
 
 	# Install headers that some programs require to build.
 	cd "${S}"
