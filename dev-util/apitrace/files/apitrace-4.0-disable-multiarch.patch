@@ -1,8 +1,13 @@
+From 805a5c3d22de68ae865a7f3334ad97a89b1c9b3b Sun, 20 Jun 2021 16:37:03 +0200
+From: Enrico Horn <farmboy0+git@googlemail.com>
+Date: Sat, 12 Apr 2014 17:28:56 +0200
+Subject: [PATCH] remove debian multiarch support
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9882a0b..aa7e16a 100644
+index 0bc2d7a..b0f12b9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -331,15 +331,6 @@
+@@ -427,15 +427,6 @@
  ##############################################################################
  # Installation directories
  
@@ -18,9 +23,9 @@ index 9882a0b..aa7e16a 100644
  if (WIN32 OR APPLE)
      # On Windows/MacOSX, applications are usually installed on a directory of
      # their own
-@@ -349,11 +340,7 @@
+@@ -445,11 +436,7 @@
  else ()
-     set (DOC_INSTALL_DIR share/doc/${CMAKE_PROJECT_NAME})
+     set (DOC_DEFAULT_INSTALL_DIR share/doc/${CMAKE_PROJECT_NAME})
      set (LIB_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
 -    if (ARCH_SUBDIR)
 -        set (LIB_ARCH_INSTALL_DIR lib/${ARCH_SUBDIR}/${CMAKE_PROJECT_NAME})
@@ -30,4 +35,4 @@ index 9882a0b..aa7e16a 100644
 +    set (LIB_ARCH_INSTALL_DIR lib${LIB_SUFFIX}/${CMAKE_PROJECT_NAME})
  endif ()
  
- set (SCRIPTS_INSTALL_DIR ${LIB_INSTALL_DIR}/scripts)
+ # Allow customization of the doc installation dir (Slackware uses different

@@ -1,8 +1,13 @@
+From 41eba90bb6b00c35547604378d29d67ba37e84ad Sun, 20 Jun 2021 16:37:20 +0200
+From: Enrico Horn <farmboy0+git@googlemail.com>
+Date: Sat, 12 Apr 2014 17:00:02 +0200
+Subject: [PATCH] disable all CLI commands with ENABLE_CLI=OFF
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1e23728..09a9fd3 100644
+index 597503d..0bc2d7a 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -602,8 +602,6 @@
+@@ -527,8 +527,6 @@
  add_subdirectory (dispatch)
  add_subdirectory (helpers)
  add_subdirectory (wrappers)
@@ -11,7 +16,7 @@ index 1e23728..09a9fd3 100644
  
  
  ##############################################################################
-@@ -615,6 +613,8 @@
+@@ -540,6 +538,8 @@
      endif ()
      add_subdirectory (cli)
      add_subdirectory (scripts)
