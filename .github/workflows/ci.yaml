@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  repoman:
+    runs-on: ubuntu-latest
+    container: gentoo/stage3:amd64-systemd
+    steps:
+    - uses: actions/checkout@v2
+    - name: install portage
+      run: emerge-webrsync
+    - name: install repoman
+      run: emerge app-portage/repoman
+    - name: repoman checks
+      run: repoman -x full
