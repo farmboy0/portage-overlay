@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>farmboy0</name>
+		<description>A set of packages provided by farmboy0</description>
+		<homepage>https://github.com/farmboy0/portage-overlay</homepage>
+		<owner>
+			<username>farmboy0</username>
+		</owner>
+		<source type="git">https://github.com/farmboy0/portage-overlay</source>
+	</repo>
+</repositories>
+
