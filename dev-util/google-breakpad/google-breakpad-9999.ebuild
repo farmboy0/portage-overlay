@@ -1,8 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI="5"
+EAPI="7"
 inherit git-r3 autotools flag-o-matic
 
 DESCRIPTION="An open-source multi-platform crash reporting system"
@@ -19,7 +18,7 @@ DEPEND=""
 src_unpack() {
 	git-r3_src_unpack
 	git-r3_fetch https://chromium.googlesource.com/linux-syscall-support
-	git-r3_checkout https://chromium.googlesource.com/linux-syscall-support ${S}/src/third_party/lss
+	git-r3_checkout https://chromium.googlesource.com/linux-syscall-support "${S}"/src/third_party/lss
 }
 
 src_prepare() {
