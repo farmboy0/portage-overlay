@@ -1,7 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=8
+
+CMAKE_ECLASS="cmake"
 EGIT_REPO_URI="https://github.com/FNA-XNA/FAudio"
 
 if [[ ${PV} = 9999* ]]; then
@@ -42,7 +44,7 @@ src_configure() {
 			-DBUILD_UTILS="$(usex utils)"
 			-DXNASONG="$(usex xnasong)"
 		)
-		cmake-utils_src_configure
+		cmake_src_configure
 	}
 	multilib_parallel_foreach_abi my_configure
 }
