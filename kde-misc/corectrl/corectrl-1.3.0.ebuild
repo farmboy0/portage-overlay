@@ -45,3 +45,5 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-install.patch"
 )
+
+S=${WORKDIR}/${PN}-v${PV}
