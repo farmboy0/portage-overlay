@@ -16,16 +16,22 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-	media-libs/glm
 	media-libs/glew:0
+	media-libs/glm
 	media-libs/libsdl2
 	media-libs/openvr
+	media-video/mpv
 	x11-libs/libXcomposite
 	x11-libs/libXfixes
-	"
-DEPEND="${RDEPEND}
+"
+
+DEPEND="
+	${RDEPEND}
+"
+
+BDEPEND="
 	virtual/pkgconfig
-	"
+"
 
 src_compile() {
 	./build.sh
