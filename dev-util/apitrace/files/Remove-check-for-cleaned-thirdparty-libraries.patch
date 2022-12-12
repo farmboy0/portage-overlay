@@ -1,22 +1,18 @@
-From cdeb43f898e0acfe5a973c6ffa0df448ae914eba Sun, 20 Jun 2021 16:50:14 +0200
-From: Enrico Horn <farmboy0+git@googlemail.com>
-Date: Sun, 20 Jun 2021 16:49:42 +0200
-Subject: [PATCH] Remove check for cleaned thirdparty libraries
-
 diff --git a/thirdparty/CMakeLists.txt b/thirdparty/CMakeLists.txt
-index 7eae7e5..d82a95f 100644
+index 34eb7f7..96ea82e 100644
 --- a/thirdparty/CMakeLists.txt
 +++ b/thirdparty/CMakeLists.txt
-@@ -15,12 +15,8 @@
+@@ -18,13 +18,7 @@
  
  set (SUBMODULES_MISSING FALSE)
  foreach (path IN ITEMS
 -    brotli/LICENSE
-     gtest/googletest/LICENSE
+-    gtest/LICENSE
      libbacktrace/LICENSE
 -    libpng/LICENSE
 -    snappy/COPYING
 -    zlib/README
+-    directxmath/LICENSE
  )
      if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${path}")
          message (SEND_ERROR "error: ${CMAKE_CURRENT_SOURCE_DIR}/${path} does not exist")
