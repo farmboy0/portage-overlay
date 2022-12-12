@@ -3,9 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{7..10} )
 
-MYMESONARGS="--wrap-mode nofallback --force-fallback-for libliftoff"
+MYMESONARGS="--wrap-mode nofallback --force-fallback-for vkroots"
 inherit meson
 
 DESCRIPTION="Micro-compositor formerly known as steamcompgr"
@@ -25,6 +25,7 @@ SLOT="0"
 IUSE="pipewire"
 
 RDEPEND="
+	dev-libs/libliftoff
 	>=gui-libs/wlroots-0.15.0[X]
 	media-libs/libsdl2
 	pipewire? ( media-video/pipewire )
@@ -40,9 +41,12 @@ RDEPEND="
 	x11-libs/libXtst
 	x11-libs/libXxf86vm
 "
-DEPEND="${DEPEND}
-		dev-libs/stb
+
+DEPEND="
+	${RDEPEND}
+	dev-libs/stb
 "
+
 BDEPEND="
 	dev-libs/wayland-protocols
 	dev-util/glslang
