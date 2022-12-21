@@ -5,7 +5,7 @@ EAPI=7
 
 inherit meson
 
-DESCRIPTION="A glib wrapper for the OpenVR and soon the OpenXR API."
+DESCRIPTION="A glib wrapper for the OpenVR and the OpenXR APIs."
 HOMEPAGE="https://gitlab.freedesktop.org/xrdesktop/gxr"
 
 if [[ ${PV} == 9999 ]]; then
@@ -18,30 +18,19 @@ fi
 
 LICENSE="MIT"
 SLOT="0/9999"
-IUSE="cairo drm egl opengl X"
-REQUIRED_USE=""
+IUSE=""
 
 DEPEND="
-	>=media-libs/gulkan-0.13.0
-	media-libs/openvr
+	dev-libs/glib
+	dev-libs/json-glib
+	>=media-libs/gulkan-0.16.0
+	media-libs/openxr
 	>=x11-libs/gtk+-3.22
-	cairo? ( x11-libs/cairo )
-	drm? ( x11-libs/libdrm )
-	egl? ( media-libs/mesa[egl] )
-	opengl?
-	(
-		media-libs/glew
-		media-libs/glfw
-	)
-	X? ( x11-base/xorg-server )
 "
 RDEPEND="
 	${DEPEND}
 "
 BDEPEND="
+	>=dev-util/meson-0.52.0
 	virtual/pkgconfig
 "
-
-PATCHES=(
-	"${FILESDIR}/openvr.patch"
-)
