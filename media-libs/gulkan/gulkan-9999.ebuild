@@ -27,6 +27,7 @@ DEPEND="
 	media-libs/vulkan-loader
 	x11-libs/cairo
 	>=x11-libs/gdk-pixbuf-2.36
+	x11-libs/libxkbcommon
 	drm? ( x11-libs/libdrm )
 	opengl?
 	(
