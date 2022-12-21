@@ -1,0 +1,10 @@
+diff --git a/settings/meson.build b/settings/meson.build
+index 7356790..a346e3f 100644
+--- a/settings/meson.build
++++ b/settings/meson.build
+@@ -1,4 +1,4 @@
+-dependency('python3', version : '>= 3.6')
++dependency('python-3.10', version : '>= 3.10')
+ dependency('pygobject-3.0', version: '>= 3.26.1')
+ 
+ install_data('xrd-settings', install_dir: bindir)

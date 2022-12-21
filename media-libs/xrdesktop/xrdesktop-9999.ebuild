@@ -22,7 +22,9 @@ IUSE=""
 REQUIRED_USE=""
 
 DEPEND="
-	>=media-libs/gxr-0.13.0
+	dev-lang/python:3.10
+	dev-python/pygobject
+	>=media-libs/g3k-0.16.0
 "
 RDEPEND="
 	${DEPEND}
@@ -30,3 +32,7 @@ RDEPEND="
 BDEPEND="
 	virtual/pkgconfig
 "
+
+PATCHES=(
+    "${FILESDIR}/${PN}-python-3.10.patch"
+)
