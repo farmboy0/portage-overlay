@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit ecm
 
@@ -18,7 +18,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0/9999"
-IUSE=""
+IUSE="+pcinames"
 REQUIRED_USE=""
 
 DEPEND="
@@ -36,6 +36,7 @@ DEPEND="
 "
 RDEPEND="
 	${DEPEND}
+	pcinames? ( sys-apps/hwdata )
 "
 BDEPEND="
 	dev-util/cmake
@@ -43,5 +44,4 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-install.patch"
 )
