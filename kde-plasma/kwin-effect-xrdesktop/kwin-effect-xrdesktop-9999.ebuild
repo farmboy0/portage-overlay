@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit ecm
 
@@ -22,9 +22,10 @@ IUSE=""
 REQUIRED_USE=""
 
 DEPEND="
+	>=media-libs/g3k-0.16.0
 	media-libs/graphene
-	media-libs/xrdesktop
-	x11-libs/libinputsynth
+	>=media-libs/xrdesktop-0.16.0
+	>=x11-libs/libinputsynth-0.16.0
 "
 RDEPEND="
 	${DEPEND}
