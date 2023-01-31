@@ -1,0 +1,13 @@
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 83c2557..b773b8f 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -195,7 +195,7 @@
+ if(WIN32)
+ 	SET(LIB_INSTALL_DIR "bin/${CMAKE_GENERATOR_PLATFORM}/" CACHE STRING "")
+ else()
+-	SET(LIB_INSTALL_DIR "lib/" CACHE STRING "")
++	SET(LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/ CACHE STRING "")
+ endif()
+ 
+ function(SURVIVE_REGISTER_PLUGIN PLUGIN)
