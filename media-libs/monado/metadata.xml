@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<use>
+		<flag name="default">Set as default OpenXR runtime.</flag>
+		<flag name="euroc">Build EuRoC dataset driver.</flag>
+		<flag name="gles">Enable support for OpenGL-ES.</flag>
+		<flag name="hidapi">Build drivers depending on hidapi (PSVR and RiftS).</flag>
+		<flag name="uvc">Build livuvc for camera support.</flag>
+		<flag name="vive">Build driver for Vive/Index.</flag>
+		<flag name="vulkan">Enable vulkan support.</flag>
+	</use>
+</pkgmetadata>
