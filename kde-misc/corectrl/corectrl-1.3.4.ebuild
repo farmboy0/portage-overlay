@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.com/${PN}/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.gz"
+	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2"
 	KEYWORDS="~amd64 ~arm64 ~x86"
 fi
 
@@ -46,4 +46,4 @@ BDEPEND="
 PATCHES=(
 )
 
-S=${WORKDIR}/corectrl-947719d97a37f67315cf38d5dc986c06aa85aa99
+S=${WORKDIR}/${PN}-v${PV}
