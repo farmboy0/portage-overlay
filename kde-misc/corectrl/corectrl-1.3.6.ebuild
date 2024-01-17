@@ -39,7 +39,7 @@ RDEPEND="
 	pcinames? ( sys-apps/hwdata )
 "
 BDEPEND="
-	dev-util/cmake
+	dev-build/cmake
 	virtual/pkgconfig
 "
 
