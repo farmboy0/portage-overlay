@@ -28,7 +28,7 @@ LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
-BDEPEND=">=dev-util/cmake-3.12.0"
+BDEPEND=">=dev-build/cmake-3.12.0"
 DEPEND="
 	dev-cpp/eigen
 	dev-libs/libusb
