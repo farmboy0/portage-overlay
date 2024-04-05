@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.com/${PN}/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.gz"
+	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2"
 	KEYWORDS="~amd64 ~arm64 ~x86"
 fi
 
@@ -33,6 +33,7 @@ DEPEND="
 	sys-auth/polkit
 	dev-libs/quazip
 	dev-libs/botan:2
+	dev-libs/pugixml
 "
 RDEPEND="
 	${DEPEND}
@@ -47,3 +48,11 @@ PATCHES=(
 )
 
 S=${WORKDIR}/${PN}-v${PV}
+
+src_configure() {
+	local mycmakeargs=(
+		-DBUILD_TESTING=OFF
+		-WITH_DEBUG_INFO=ON
+	)
+	cmake_src_configure
+}

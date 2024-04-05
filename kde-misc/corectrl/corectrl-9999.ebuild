@@ -33,6 +33,7 @@ DEPEND="
 	sys-auth/polkit
 	dev-libs/quazip
 	dev-libs/botan:2
+	dev-libs/pugixml
 "
 RDEPEND="
 	${DEPEND}
@@ -45,3 +46,11 @@ BDEPEND="
 
 PATCHES=(
 )
+
+src_configure() {
+	local mycmakeargs=(
+		-DBUILD_TESTING=OFF
+		-WITH_DEBUG_INFO=ON
+	)
+	cmake_src_configure
+}
