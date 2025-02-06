@@ -22,16 +22,13 @@ IUSE="+pcinames"
 REQUIRED_USE=""
 
 DEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtcharts:5[qml]
-	dev-qt/qtdbus:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtquickcontrols2:5
-	dev-qt/qtsvg:5
-	dev-qt/qtwidgets:5
-	dev-qt/linguist-tools:5[qml]
+	dev-qt/qtbase:6[dbus,network,widgets]
+	dev-qt/qtcharts:6[qml]
+	dev-qt/qtdeclarative:6
+	dev-qt/qtsvg:6
+	dev-qt/qttools:6[linguist]
 	sys-auth/polkit
-	dev-libs/quazip[qt5]
+	dev-libs/quazip[qt6]
 	dev-libs/botan:2
 	dev-libs/pugixml
 	>=dev-libs/spdlog-1.4.0
