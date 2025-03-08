@@ -26,7 +26,7 @@ DEPEND="
 	dev-qt/qtcharts:6[qml]
 	dev-qt/qtdeclarative:6
 	dev-qt/qtsvg:6
-	dev-qt/qttools:6[linguist]
+	dev-qt/qttools:6[linguist,qml]
 	sys-auth/polkit
 	dev-libs/quazip[qt6]
 	dev-libs/botan:2
