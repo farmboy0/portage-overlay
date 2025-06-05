@@ -3,7 +3,7 @@
 
 EAPI=8
 
-EGIT_REPO_URI="https://github.com/cntools/libsurvive"
+EGIT_REPO_URI="https://github.com/collabora/libsurvive"
 CMAKE_ECLASS=cmake
 
 if [[ ${PV} = 9999* ]]; then
@@ -14,12 +14,12 @@ fi
 inherit cmake ${GIT_ECLASS}
 
 DESCRIPTION="Open Source Lighthouse Tracking System"
-HOMEPAGE="https://github.com/cntools/libsurvive"
+HOMEPAGE="https://github.com/collabora/libsurvive"
 
 if [[ ${PV} == 9999* ]]; then
 	SRC_URI=""
 else
-	SRC_URI="https://github.com/cntools/libsurvive/releases/download/v${PV}/libsurvive-v${PV}-4-source.zip -> ${P}.tar.gz"
+	SRC_URI="https://github.com/collabora/libsurvive/releases/download/v${PV}/libsurvive-v${PV}-4-source.zip -> ${P}.tar.gz"
 	KEYWORDS="~amd64"
 	S="${WORKDIR}/${PN}"
 fi
