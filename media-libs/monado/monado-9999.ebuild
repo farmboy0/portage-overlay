@@ -30,7 +30,6 @@ IUSE="bluetooth dbus default euroc ffmpeg gles gstreamer hidapi opengl sdl syste
 BDEPEND=""
 DEPEND="
 	dev-cpp/eigen:3
-	>=dev-libs/cJSON-1.7.13
 	dev-libs/libbsd
 	dev-util/glslang
 	media-libs/mesa[egl(+)]
@@ -118,7 +117,7 @@ src_configure() {
 		-DXRT_HAVE_PERCETTO=OFF
 		-DXRT_HAVE_REALSENSE=OFF
 		-DXRT_HAVE_SDL2=$(usex sdl)
-		-DXRT_HAVE_SYSTEM_CJSON=ON
+		-DXRT_HAVE_SYSTEM_CJSON=OFF
 		-DXRT_HAVE_SYSTEMD=$(usex systemd)
 		-DXRT_HAVE_TRACY=OFF
 		-DXRT_HAVE_VULKAN=$(usex vulkan)
