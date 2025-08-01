@@ -29,7 +29,7 @@ DEPEND="
 	dev-qt/qttools:6[linguist,qml]
 	sys-auth/polkit
 	dev-libs/quazip[qt6]
-	dev-libs/botan:2
+	dev-libs/botan:3
 	dev-libs/pugixml
 	>=dev-libs/spdlog-1.4.0
 "
