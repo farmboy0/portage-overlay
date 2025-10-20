@@ -45,6 +45,8 @@ BDEPEND="
 PATCHES=(
 )
 
+S=${WORKDIR}/${PN}-v${PV}
+
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_TESTING=OFF
