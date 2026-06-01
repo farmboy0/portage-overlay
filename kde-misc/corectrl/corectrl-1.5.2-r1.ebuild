@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit ecm
+inherit cmake
 
 DESCRIPTION="Core control application."
 HOMEPAGE="https://gitlab.com/corectrl/corectrl"
@@ -44,6 +44,8 @@ BDEPEND="
 
 PATCHES=(
 )
+
+S=${WORKDIR}/${PN}-v${PV}
 
 src_configure() {
 	local mycmakeargs=(
