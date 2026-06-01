@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
+KFMIN=6
 inherit ecm
 
 DESCRIPTION="Core control application."
@@ -28,7 +28,7 @@ DEPEND="
 	dev-qt/qtsvg:6
 	dev-qt/qttools:6[linguist,qml]
 	sys-auth/polkit
-	dev-libs/quazip[qt6]
+	dev-libs/quazip
 	dev-libs/botan
 	dev-libs/pugixml
 	>=dev-libs/spdlog-1.4.0
